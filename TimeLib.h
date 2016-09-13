@@ -5,7 +5,7 @@
 /*
   July 3 2011 - fixed elapsedSecsThisWeek macro (thanks Vincent Valdy for this)
               - fixed  daysToTime_t macro (thanks maniacbug)
-*/     
+*/
 
 #ifndef _Time_h
 #ifdef __cplusplus

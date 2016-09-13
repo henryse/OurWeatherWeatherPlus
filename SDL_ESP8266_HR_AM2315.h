@@ -14,22 +14,26 @@ Additional improvements added by Daniel Sandoval/EasternStarGeek
  ****************************************************/
 
 #if (ARDUINO >= 100)
- #include "Arduino.h"
+#include "Arduino.h"
 #else
- #include "WProgram.h"
+
+#include "WProgram.h"
+
 #endif
+
 #include "Wire.h"
 
 #define AM2315_I2CADDR       0x5C
 #define AM2315_READREG       0x03
 
 class SDL_ESP8266_HR_AM2315 {
- public:
-  SDL_ESP8266_HR_AM2315();
-  //boolean begin(void);
-  boolean readData(float *dataArray);  
- 
+public:
+    SDL_ESP8266_HR_AM2315();
+
+    //boolean begin(void);
+    boolean readData(float *dataArray);
+
 private:
-  float humidity, temp;
+    float humidity, temp;
 };
 

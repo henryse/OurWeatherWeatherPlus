@@ -16,7 +16,7 @@
 #define DEBUG
 
 //define if you want to only debug local files, otherwise #undef
-#define LOCALDEBUG 
+#define LOCALDEBUG
 
 //WEB_SERVER_PORT is the port that the Arduino Webserver will be responding to requests from the RasPiConnect/ArduinoConnect App
 #define WEB_SERVER_PORT 80

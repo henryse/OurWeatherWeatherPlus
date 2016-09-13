@@ -4,29 +4,24 @@
 #define __RTCTEMPERATURE_H__
 
 
-class RtcTemperature
-{
+class RtcTemperature {
 public:
     RtcTemperature(int8_t degrees, uint8_t fraction) :
-        integerDegrees(degrees),
-        decimalFraction(fraction)
-    {
+            integerDegrees(degrees),
+            decimalFraction(fraction) {
     }
 
-    float AsFloat()
-    {
-        float degrees = (float)integerDegrees;
-        degrees += ((degrees < 0) ? -1 : 1) * (float)decimalFraction;
+    float AsFloat() {
+        float degrees = (float) integerDegrees;
+        degrees += ((degrees < 0) ? -1 : 1) * (float) decimalFraction;
         return degrees;
     }
 
-    int8_t AsWholeDegrees()
-    {
+    int8_t AsWholeDegrees() {
         return integerDegrees;
     }
 
-    uint8_t GetFractional()
-    {
+    uint8_t GetFractional() {
         return decimalFraction;
     }
 

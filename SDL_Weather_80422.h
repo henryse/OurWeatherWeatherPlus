@@ -27,58 +27,72 @@
 #include "OWMAdafruit_ADS1015.h"
 
 
-extern "C" void ICACHE_RAM_ATTR serviceInterruptAnem(void);
-extern "C" void ICACHE_RAM_ATTR serviceInterruptRain(void);
-class SDL_Weather_80422
-{
-  public:
+extern "C" void ICACHE_RAM_ATTR
+
+serviceInterruptAnem(void);
+
+extern "C" void ICACHE_RAM_ATTR
+
+serviceInterruptRain(void);
+
+class SDL_Weather_80422 {
+public:
     SDL_Weather_80422(int pinAnem, int pinRain, int intAnem, int intRain, int ADChannel, int ADMode);
-  
+
     float get_current_rain_total();
+
     float current_wind_speed();
+
     float current_wind_direction();
+
     float current_wind_direction_voltage();
+
     float get_wind_gust();
+
     void reset_rain_total();
+
     void reset_wind_gust();
-  
+
     void setWindMode(int selectedMode, float sampleTime);  // time in seconds
-    
+
 
     static unsigned long _shortestWindTime;
     static long _currentRainCount;
     static long _currentWindCount;
-    
 
-     
+
     float accessInternalCurrentWindDirection();
 
-  friend void ICACHE_RAM_ATTR serviceInterruptAnem();
-  friend void ICACHE_RAM_ATTR serviceInterruptRain(); 
-  
-  private:
-  
+    friend void ICACHE_RAM_ATTR
+
+    serviceInterruptAnem();
+
+    friend void ICACHE_RAM_ATTR
+
+    serviceInterruptRain();
+
+private:
+
 
     int _pinAnem;
-    int _pinRain;    
+    int _pinRain;
     int _intAnem;
     int _intRain;
     int _ADChannel;
     int _ADMode;
     float _sampleTime;
     int _selectedMode;
-    
 
-    
-    
+
     unsigned long _startSampleTime;
-    
+
 
     float _currentWindSpeed;
 
     float _currentWindDirection;
-    
+
     void startWindSample(float sampleTime);
+
     float get_current_wind_speed_when_sampling();
 };
 

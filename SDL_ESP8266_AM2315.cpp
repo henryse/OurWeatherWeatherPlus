@@ -21,65 +21,65 @@ Adafruit_AM2315::Adafruit_AM2315() {
 
 
 boolean Adafruit_AM2315::begin(void) {
-  Wire.begin(5, 4);
+    Wire.begin(5, 4);
 
-  // try to read data, as a test
-  return readData();
+    // try to read data, as a test
+    return readData();
 
 }
 
 boolean Adafruit_AM2315::readData(void) {
-  uint8_t reply[10];
+    uint8_t reply[10];
 
-  Wire.beginTransmission(AM2315_I2CADDR);
-  Wire.write(AM2315_READREG);
-  Wire.write(0x00);  // start at address 0x0
-  Wire.write(4);  // request 4 bytes data
-  Wire.endTransmission();
-  delay(40);
+    Wire.beginTransmission(AM2315_I2CADDR);
+    Wire.write(AM2315_READREG);
+    Wire.write(0x00);  // start at address 0x0
+    Wire.write(4);  // request 4 bytes data
+    Wire.endTransmission();
+    delay(40);
 
-  // for reasons unknown we have to send the data twice :/
-  // whats the bug here?
-  Wire.beginTransmission(AM2315_I2CADDR);
-  Wire.write(AM2315_READREG);
-  Wire.write(0x00);  // start at address 0x0
-  Wire.write(4);  // request 4 bytes data
-  Wire.endTransmission();
+    // for reasons unknown we have to send the data twice :/
+    // whats the bug here?
+    Wire.beginTransmission(AM2315_I2CADDR);
+    Wire.write(AM2315_READREG);
+    Wire.write(0x00);  // start at address 0x0
+    Wire.write(4);  // request 4 bytes data
+    Wire.endTransmission();
 
-  delay(40);
-  Wire.requestFrom(AM2315_I2CADDR, 8);
-  for (uint8_t i = 0; i < 8; i++) {
-    reply[i] = Wire.read();
-    //Serial.println(reply[i], HEX);
-  }
+    delay(40);
+    Wire.requestFrom(AM2315_I2CADDR, 8);
+    for (uint8_t i = 0; i < 8; i++) {
+        reply[i] = Wire.read();
+        //Serial.println(reply[i], HEX);
+    }
 
-  if (reply[0] != AM2315_READREG) return false;
-  if (reply[1] != 4) return false; // bytes req'd
+    if (reply[0] != AM2315_READREG) return false;
+    if (reply[1] != 4) return false; // bytes req'd
 
-  humidity = reply[2];
-  humidity *= 256;
-  humidity += reply[3];
-  humidity /= 10;
-  //Serial.print("H"); Serial.println(humidity);
+    humidity = reply[2];
+    humidity *= 256;
+    humidity += reply[3];
+    humidity /= 10;
+    //Serial.print("H"); Serial.println(humidity);
 
-  temp = reply[4];
-  temp *= 256;
-  temp += reply[5];
-  temp /= 10;
-  //Serial.print("T"); Serial.println(temp);
+    temp = reply[4];
+    temp *= 256;
+    temp += reply[5];
+    temp /= 10;
+    //Serial.print("T"); Serial.println(temp);
 
-  return true;
+    return true;
 }
 
 
 float Adafruit_AM2315::readTemperature(void) {
-  if (! readData()) return NAN;
-  return temp;
+    if (!readData()) return NAN;
+    return temp;
 }
 
 float Adafruit_AM2315::readHumidity(void) {
-  if (! readData()) return NAN;
-  return humidity;
+    if (!readData()) return NAN;
+    return humidity;
 }
 
 /*********************************************************************/
